@@ -1,0 +1,19 @@
+{% extends "base/base.html" %}
+{% block title %}
+Manager DashBoard
+{% endblock  %}
+{% block content %}
+
+{% if role %}
+<div class="w-fit p-4 m-4 bg-green-400 rounded-lg">
+	<a href="{% url 'product_list_manage' %}">welcome product manager manage products </a>
+</div>
+<div class="w-fit p-4 m-4 bg-yellow-400 rounded-lg">
+	<a href="{% url 'CategoryManager' %}">welcome product manager manage Category </a>
+</div>
+<div class="w-fit p-4 m-4 bg-blue-400 rounded-lg">
+	<a href="{% url 'ManageCoupons' %}">welcome product manager manage Coupon's </a>
+</div>
+{% endif %}
+
+{% endblock %}

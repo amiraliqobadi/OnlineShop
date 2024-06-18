@@ -1,0 +1,10 @@
+django-multiupload
+Django
+pillow
+django-filter
+django-crispy-forms
+crispy-tailwind
+asgiref
+celery
+redis
+django-celery-beat

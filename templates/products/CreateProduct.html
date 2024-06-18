@@ -1,0 +1,25 @@
+{% extends "base/base.html" %}
+{% block title %}
+Create Product
+{% endblock  %}
+{% block content %}
+
+
+<div class="grid min-h-screen place-items-center bg-white-500 p-16">
+    <div class="w-fit rounded-md bg-white-300 p-4 pt-0 shadow-lg">
+	    <h1>welcome - {{user_name}} </h1>
+	{% load tailwind_filters %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button
+                type="submit"
+                class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            >
+                Create Product
+            </button>
+        </form>
+	</div>
+</div>
+
+{% endblock %}
