@@ -8,3 +8,7 @@ asgiref
 celery
 redis
 django-celery-beat
+python-decouple
+django-jazzmin
+djangorestframework
+django-taggit
