@@ -1,6 +1,6 @@
 {% extends "base/base.html" %}
 {% block title %}
-Products
+Product
 {% endblock  %}
 {% block content %}
 <div class="w-content p-4 m-4 bg-blue-400 rounded-lg flex flex-row">
@@ -12,15 +12,12 @@ Products
 	<div>we dont have category</div>
 {% endif %}
 </div>
-{% if user_role %}
+{% if product_manager %}
 <div class="w-content p-4 m-4 bg-green-400 rounded-lg">
 	<a href="{% url 'product_list_manage' %}">welcome product manager manage products </a>
 </div>
 {% endif %}
 <div class="flex gap-5 flex-wrap p-4">
-
-
-
 	<div class="w-full max-w-sm  bg-blue-400 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40">
 		<div class="grid grid-cols-{{images_counter}} ">
 			{% for image in images %}

@@ -117,7 +117,7 @@ class WishList(models.Model):
 
 class Permission(models.Model):
     name = models.CharField(max_length=50)
-    module = models.CharField(max_length=50)  # e.g., 'products', 'orders', 'users'
+    module = models.CharField(max_length=50)
 
 
 class Role(models.Model):
