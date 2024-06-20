@@ -12,3 +12,5 @@ python-decouple
 django-jazzmin
 djangorestframework
 django-taggit
+poetry
+pre-commit

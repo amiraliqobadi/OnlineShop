@@ -11,13 +11,13 @@ app.autodiscover_tasks()
 CELERY_BEAT_SCHEDULE = {
     "verify-users-every-day": {
         "task": "apps.user.tasks.verify_users",
-        "schedule": crontab(minute="0", hour="0"),  # Run daily at midnight
+        "schedule": crontab(minute="0", hour="0"),
     },
 }
 
 app.conf.beat_schedule = {
     "check-expired-discounts": {
         "task": "apps.products.check_and_remove_expired_discounts",
-        "schedule": crontab(minute="*/1"),  # Run every minute
+        "schedule": crontab(minute="*/1"),
     },
 }
