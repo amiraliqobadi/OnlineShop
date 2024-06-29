@@ -2,7 +2,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 
-from apps.user.views.Profile import ProductManagerProfile
+from apps.user.views.ProductManagerProfile import ProductManagerProfile
+from apps.user.views.UserProfile import Profile, UpdateUserInfo
 from apps.user.views.api import SignUpView, SignInView, CustomLogoutView, AuthUserView
 
 # from apps.user.views.cart import addtocart
@@ -17,7 +18,8 @@ urlpatterns = [
 		name="ProductManagerProfile",
 	),
 	path("activate/", AuthUserView.as_view(), name="activate_account"),
-	# path("addtocart/", addtocart.as_view(), name="user_cart"),
+	path("user/profile/<int:pk>/", Profile.as_view(), name="profile"),
+	path("user/profile/update/<int:pk>/", UpdateUserInfo.as_view(), name="update_user_info"),
 ]
 
 if settings.DEBUG:

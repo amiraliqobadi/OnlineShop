@@ -1,12 +1,15 @@
 import datetime
 
 from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.views.generic import (
 	ListView,
 	DeleteView,
 )
+from django.views.generic.edit import UpdateView
 
 from apps.products.forms import CreateCoupon
 from apps.products.models import Coupon
@@ -76,14 +79,6 @@ class DeleteCoupon(DeleteView):
 			return redirect(self.success_url)
 		messages.error(request, "coupon not found")
 		return redirect(self.success_url)
-
-
-from django.views.generic.edit import UpdateView
-from django.urls import reverse_lazy
-from django.shortcuts import render, redirect, get_object_or_404
-from .forms import CreateCoupon
-from .models import Coupon
-from django.http import HttpResponseRedirect
 
 
 class UpdateCouponView(UpdateView):

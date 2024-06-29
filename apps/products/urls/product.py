@@ -39,7 +39,7 @@ urlpatterns = [
 	path(
 		"<int:pk>/update/category", CategoryUpdateView.as_view(), name="CategoryUpdate"
 	),
-	path("manage/coupon", CouponManage.as_view(), name="ManageCoupon"),
+	path("manage/coupon", CouponManage.as_view(), name="ManageCoupons"),
 	path("manage/create/coupon", CreateCouponView.as_view(), name="CreateCoupon"),
 	path("manage/delete/coupon/<int:pk>", DeleteCoupon.as_view(), name="DeleteCoupon"),
 	path("<int:pk>/manage/update/coupon", UpdateCouponView.as_view(), name="UpdateCoupon"),
