@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from rest_framework.generics import RetrieveAPIView, get_object_or_404, UpdateAPIView
+from rest_framework.generics import RetrieveAPIView, get_object_or_404, UpdateAPIView, DestroyAPIView
 from rest_framework.renderers import TemplateHTMLRenderer
 
 from apps.user.models import User
@@ -78,3 +78,12 @@ class UpdateUserInfo(UpdateAPIView):
 			return render(request, self.template_name, {'serializer': serializer})
 		else:
 			return render(request, self.template_name, {'serializer': serializer})
+
+
+class DeleteUserApi(DestroyAPIView):
+	model = User
+	
+	def post(self, request, *args, **kwargs):
+		user = get_object_or_404(User, pk=kwargs.get('pk'))
+		user.delete()
+		return redirect('signin')

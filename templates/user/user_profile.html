@@ -409,7 +409,7 @@
                                         <div id="delete_authenticate" class="flex items-center hidden p-5" >                 
                                             <p id="delete_result" class="px-2 py-1 inline text-lg font-medium truncate bg-red-700 rounded-lg"> Are You Sure You Want Delete {{ user.user_name }} Account ?</p>     
                                             {% load tailwind_filters %} 
-                                            <form method="post" class="inline p-5">
+                                            <form method="post" action="{% url 'delete_user_info' pk=user.pk %}" class="inline p-5">
                                                 {% csrf_token %} 
                                                 {{ form|crispy }}
                                                 <button type="submit" id="delete_confirm" class=" inline ms-5 text-lg font-medium truncate bg-green-700 px-2 text-b transition-colors duration-300 hover:bg-red-700 focus:outline-none focus:ring focus:ring-white-400 rounded-lg">
