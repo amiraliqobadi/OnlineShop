@@ -1,3 +1,5 @@
+import base64
+
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from rest_framework.generics import RetrieveAPIView, get_object_or_404, UpdateAPIView, DestroyAPIView
@@ -34,19 +36,22 @@ class Profile(RetrieveAPIView):
 		context["l_name"] = queryset.l_name
 		if queryset.addresses is not None:
 			for address in queryset.addresses:
-				if queryset.addresses is not None:
-					context["addresses"] = {
-						"address": queryset.addresses.address,
-						"city": queryset.addresses.city,
-						"state": queryset.addresses.state,
-						"zip_code": queryset.addresses.zip_code,
-						"country": queryset.addresses.country,
-					}
+				context["address"] = address.address
+				context["city"] = address.city
+				context["state"] = address.state
+				context["zip_code"] = address.zip_code
+				context["country"] = address.country
 		else:
-			context["addresses"] = "you dont have address"
+			context["address"] = None
+			context["city"] = None
+			context["state"] = None
+			context["zip_code"] = None
+			context["country"] = None
 		
 		if queryset.user_image is not None:
 			context["user_img"] = queryset.user_image
+		else:
+			context["user_img"] = None
 		return context
 	
 	def get(self, request, *args, **kwargs):
@@ -70,9 +75,16 @@ class UpdateUserInfo(UpdateAPIView):
 		serializer = self.serializer_class(user, data=request.data)
 		
 		if serializer.is_valid():
+			
+			if serializer.validated_data.get('user_image'):
+				serializer.save()
+				image_base64 = base64.b64encode(serializer.validated_data['user_image'].read()).decode('utf-8')
+				user.user_image = image_base64
+				user.save()
 			if serializer.validated_data.get('password'):
 				user.set_password(serializer.validated_data['password'])
 				return redirect('signin')
+			
 			serializer.save()
 			messages.success(request, "User information updated successfully.")
 			return render(request, self.template_name, {'serializer': serializer})
