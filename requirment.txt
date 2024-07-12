@@ -1,0 +1,16 @@
+django-multiupload
+Django
+pillow
+django-filter
+django-crispy-forms
+crispy-tailwind
+asgiref
+celery
+redis
+django-celery-beat
+python-decouple
+django-jazzmin
+djangorestframework
+django-taggit
+poetry
+pre-commit

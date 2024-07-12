@@ -1,0 +1,48 @@
+{% extends "base/base.html" %}
+{% block title %}
+Coupon Management
+{% endblock  %}
+{% block content %}
+	<div class="w-content p-4 m-4 bg-green-400 rounded-lg">
+		<a href="{% url 'CreateCoupon' %}">welcome product manager create coupon</a>
+	</div>
+	{% if count == 0 %}
+		<div class="w-content p-4 m-4 bg-green-400 rounded-lg">
+           we don't have any coupon create it
+        </div>
+	{% elif count == 1 %}
+		<div> you have {{ count }} coupon</div>
+	{% else %}
+	
+		<div> you have {{ count }} coupons</div>
+    {% endif %}
+	
+	{% if count != 0 %}
+		{% for coupon in coupons %}
+		<div class="flex gap-5 flex-wrap p-4">
+	    <div class="px-5 pb-5">
+		    <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">coupon code is :{{ name }}</h5>
+	        <div class="flex items-center mt-2.5 mb-5">
+	            <div class="flex items-center space-x-1 rtl:space-x-reverse">
+		            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">expire date :{{ expire_date }}</span>
+		            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">created date :{{ created_date }}</span>
+		            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">created date :{{ price }}</span>
+	            </div>
+	            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">capacity :{{ capacity }}</span>
+	        </div>
+	        <div class="flex items-center justify-between">
+	            <span class="text-3xl font-bold text-gray-900 dark:text-white">{{price}}</span>
+	            <a href="{% url 'DeleteCoupon' pk=coupon.id %}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Delete</a>
+		        <form method="post" action="{% url 'DeleteCoupon' pk=coupon.id %}" >
+					{% csrf_token %}
+					<input type="hidden" name="_method" value="DELETE">
+					<button type="submit" class="p-1 m-4 bg-red-400 rounded-lg text-white">
+						Delete
+					</button>
+				</form>
+	        </div>
+	    </div>
+	</div>
+		{% endfor %}
+	{% endif %}	
+{% endblock %}

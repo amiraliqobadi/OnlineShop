@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<title>{% block title %}{% endblock %}</title>
+{% include 'base/head.html' %}
+
+<body class="bg-gray-100">
+	<header>
+		{% include 'base/navbar.html' %}
+	</header>
+	<main>
+		<section>
+			{% block content %}{% endblock %}
+		</section>
+	</main>
+</body>
+</html>

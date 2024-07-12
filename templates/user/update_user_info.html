@@ -1,0 +1,25 @@
+{% extends "base/base.html" %}
+{% block title %}
+	Update Information
+{% endblock %}
+{% block content %}
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<title> Update Information</title>
+	</head>
+
+    <div class="flex justify-center items-center min-h-screen bg-gray-500">
+        {% load rest_framework %}
+        <form class="form-horizontal max-w-md" action="{% url 'update_user_info' pk=user.pk %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% render_form serializer %}
+            <div class="form-group">
+                <div class="col-sm-offset-2 max-w-md col-sm-10">
+                    <button type="submit" class="btn btn-default">update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+{% endblock %}

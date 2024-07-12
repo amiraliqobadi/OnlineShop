@@ -1,0 +1,42 @@
+{% extends "base/base.html" %}
+{% block title %}
+Category manage
+{% endblock  %}
+{% block content %}
+<div class="w-fit p-4 m-8 bg-green-400 rounded-lg flex flex-row text-center">
+	welcome product manager
+</div>
+<div class="w-fit p-4 ms-8 m-4 bg-blue-400 rounded-lg flex flex-row">
+{% if category is not None %}
+	{% for cat in category %}
+		{% if cat.is_active  %}
+			<div class="bg-white rounded-lg p-1">
+			<a href="{% url 'category' pk=cat.id %}" class="px-1">
+				<a href="{% url 'CategoryUpdate' pk=cat.id %}" class="btn btn-primary text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update Category</a>
+				<form method="post" action="{% url 'CategoryDelete' pk=cat.id %}" >
+					{% csrf_token %}
+					<input type="hidden" name="_method" value="DELETE">
+					<button type="submit" class="p-1 m-4 bg-red-400 rounded-lg text-white">
+						delete {{cat}}
+					</button>
+				</form>
+				<div class="bg-blue-400 text-white ms-4 w-fit p-1 rounded-lg">{{cat}}</div>
+
+			</a>
+			</div>
+		{% endif %}
+	{% endfor %}
+	{% else %}
+		<div class="">
+			we don't have category
+		</div>
+	{% endif %}
+</div>
+
+{% load tailwind_filters %}
+<div class=" m-4 p-4">
+	<div class="max-w-64">
+			<a href="{% url 'CreateCategory' %}" class="btn btn-primary text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create New Category</a>
+	</div>
+</div>
+{% endblock %}

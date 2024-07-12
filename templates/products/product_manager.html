@@ -1,0 +1,34 @@
+{% extends "base/base.html" %}
+{% block title %}
+Product manage
+{% endblock  %}
+{% block content %}
+<div class="flex gap-5 flex-wrap p-4">
+	{% if products is None %}
+	<div class="w-fit p-4 m-4 bg-green-400 rounded-lg">
+		<div>we dont have any thing</div>
+	</div>
+	{% else %}
+{% for product in products %}
+	{% if is_active %}
+	<div class="w-fit bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+	    <div class="px-5 pb-5">
+		    <h5 class="text-xl py-4 font-semibold tracking-tight text-gray-900 dark:text-white"><div class="tracking-tight text-gray-400 dark:text-white">product name : <div class="text-black">{{ name }}</div></h5>
+	        <div class="flex items-center gap-5">
+		        <form method="post" action="{% url 'delete_product' pk=product.id %}">
+			         {% csrf_token %}
+			        <input type="hidden" name="_method" value="DELETE">
+			        <button type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Delete</button>
+		        </form>
+		        <a href="{% url 'product_update' pk=product.id %}" class="btn btn-primary text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">update</a>
+	        </div>
+	    </div>
+	</div>
+	{% endif %}
+{% endfor %}
+	{% endif %}
+	<div class="w-fit p-1 m-4 bg-green-400 rounded-lg h-fit">
+		<a href="{% url 'create_product' %}" class="text-white">Add new products</a>
+	</div>
+</div>
+{% endblock %}
